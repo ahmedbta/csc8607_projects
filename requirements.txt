@@ -1,8 +1,8 @@
 torch
 torchvision
-torchaudio
-torchtext
 tensorboard
 pyyaml
 tqdm
 numpy
+torchmetrics
+gdown

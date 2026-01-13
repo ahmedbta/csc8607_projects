@@ -1,0 +1,75 @@
+augment:
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    enabled: true
+    hue: 0.1
+    saturation: 0.2
+  random_flip: true
+  random_rotation:
+    degrees: 15
+    enabled: true
+dataset:
+  attributes:
+  - Smiling
+  - Wearing_Hat
+  - Male
+  - Young
+  - Eyeglasses
+  download: true
+  name: CelebA
+  num_workers: 4
+  root: ./data
+  shuffle: true
+hparams:
+  lr:
+  - 0.001
+  model:
+    channels_block3:
+    - 192
+    dropout:
+    - 0.0
+  weight_decay:
+  - 0.0
+metrics:
+  classification:
+  - accuracy
+model:
+  channels_block3: 192
+  dropout: 0.0
+  input_shape:
+  - 3
+  - 64
+  - 64
+  num_classes: 5
+  type: cnn_multilabel
+paths:
+  artifacts_dir: ./artifacts
+  runs_dir: ./runs
+preprocess:
+  normalize:
+    mean:
+    - 0.5
+    - 0.5
+    - 0.5
+    std:
+    - 0.5
+    - 0.5
+    - 0.5
+  resize:
+  - 64
+  - 64
+train:
+  batch_size: 64
+  device: auto
+  epochs: 20
+  max_steps: null
+  optimizer:
+    lr: 0.001
+    momentum: 0.9
+    name: adam
+    weight_decay: 0.0
+  overfit_small: false
+  scheduler:
+    name: none
+  seed: 42

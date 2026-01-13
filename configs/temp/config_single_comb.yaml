@@ -27,12 +27,13 @@ model:
   type: "cnn_multilabel"
   num_classes: 5
   input_shape: [3, 64, 64]
-  channels_block3: 256
-  dropout: 0.0
+  # Hyperparameters chosen from grid search
+  channels_block3: 192
+  dropout: 0.0 # Changed for single combination run
 
 train:
   seed: 42
-  device: cuda
+  device: auto
   batch_size: 64
   epochs: 20
   max_steps: null
@@ -40,8 +41,9 @@ train:
 
   optimizer:
     name: adam
-    lr: 0.005
-    weight_decay: 0.00001
+    lr: 0.001 # Changed for single combination run
+    weight_decay: 0.0 # Changed for single combination run
+    momentum: 0.9
 
   scheduler:
     name: none
@@ -50,6 +52,12 @@ metrics:
   classification:
     - accuracy
 
+hparams:
+  lr: [0.001] # Single value for grid search
+  weight_decay: [0.0] # Single value for grid search
+  model:
+    channels_block3: [192] # Single value for grid search
+    dropout: [0.0] # Single value for grid search
 
 paths:
   runs_dir: "./runs"
